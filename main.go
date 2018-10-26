@@ -190,6 +190,8 @@ func main() {
 		close(done)
 	}()
 
-	process.Wait()
-	log.Printf("exiting")
+	if err := process.Wait(); err != nil {
+		log.Printf("error running cmd: %v\n", err)
+		os.Exit(1)
+	}
 }
