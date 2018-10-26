@@ -1,0 +1,14 @@
+[Unit]
+Description=OpenConnect VPN %I
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=%E/openconnect/%I.env
+ExecStartPre=/usr/lib/openconnect-helper/interface start tun-%I $u
+ExecStart=/usr/bin/openconnect-helper %I
+ExecStopPost=/usr/lib/openconnect-helper/interface stop tun-%I
+KillSignal=SIGINT
+Restart=on-failure
+RestartSec=15s
