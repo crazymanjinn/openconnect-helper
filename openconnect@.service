@@ -4,7 +4,7 @@ Description=OpenConnect VPN %I
 [Service]
 Type=simple
 EnvironmentFile=%E/openconnect/%I.env
-ExecStartPre=/usr/lib/openconnect-helper/interface start tun-%I $u
+ExecStartPre=/usr/lib/openconnect-helper/interface start tun-%I %u
 ExecStart=/usr/bin/openconnect-helper %I
 ExecStopPost=/usr/lib/openconnect-helper/interface stop tun-%I
 KillSignal=SIGINT
