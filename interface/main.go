@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 func init() {
@@ -18,7 +19,12 @@ func printUsageAndQuit() {
 
 func newArgs(action, iface string, extra ...string) []string {
 	args := []string{"tuntap"}
-	args = append(args, action, fmt.Sprintf("%.13s", iface), "mode", "tun")
+	args = append(args,
+		action,
+		strings.Replace(fmt.Sprintf("%.13s", iface), ".", "-", -1),
+		"mode",
+		"tun",
+	)
 	if len(extra) > 0 {
 		args = append(args, extra...)
 	}

@@ -169,7 +169,7 @@ func main() {
 		authgroup,
 		totp,
 		os.Getenv("PROTOCOL"),
-		fmt.Sprintf("tun-%.9s", os.Args[1]),
+		strings.Replace(fmt.Sprintf("tun-%.9s", os.Args[1]), ".", "-", -1),
 		script,
 		extra_args,
 		os.Args[1],
